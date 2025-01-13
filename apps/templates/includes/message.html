@@ -1,0 +1,10 @@
+<!-- templates/includes/message.html -->
+{% if messages %}
+    <div class="alert alert-{{ messages.category }}">
+        <ul>
+            {% for message in messages.messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

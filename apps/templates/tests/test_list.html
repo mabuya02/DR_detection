@@ -1,0 +1,116 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Tests{% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+  .status-pending {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+  }
+
+  .status-Completed {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+  }
+
+  .status-failed {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+  <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+      <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="javascript:">Tests</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+          <div class="page-wrapper">
+            <!-- [ Main Content ] start -->
+            <table class="datatables-users table border-top align-middle datatable dt-responsive table-check">
+
+              <thead>
+                <tr>
+                  <th>Test ID</th>
+                  <th>Patient Name</th>
+                  <th>Test Type</th>
+                  <th>Test Date</th>
+
+                  <th>Status</th>
+                  <th>Conducted By</th>
+
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for test in tests %}
+                <tr>
+                  <td>{{ test.id }}</td>
+                  <td>{{ test.patient.first_name }}{{ test.patient.last_name }}</td>
+                  <td>{{ test.test_type }}</td>
+                  <td>{{ test.test_date }}</td>
+                  <td
+                    class="{% if test.status == 'pending' %}status-pending{% elif test.status == 'completed' %}status-completed{% else %}status-failed{% endif %}">
+                    {{ test.status }}
+                  </td>
+
+                  <td> {{ test.conducted_by_user.username if test.conducted_by_user else 'N/A' }}</td>
+
+                  <td style="width: 100px;">
+
+                    <!-- View Icon -->
+                    <a href="{{ url_for('test_blueprint.view_test', test_id=test.id) }}"
+                      class="btn btn-outline-primary btn-sm d-flex justify-content-center align-items-center"
+                      title="View">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="mr-2">
+                        <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          color="#000">
+                          <path
+                            d="M21.544 11.045c.304.426.456.64.456.955c0 .316-.152.529-.456.955C20.178 14.871 16.689 19 12 19c-4.69 0-8.178-4.13-9.544-6.045C2.152 12.529 2 12.315 2 12c0-.316.152-.529.456-.955C3.822 9.129 7.311 5 12 5c4.69 0 8.178 4.13 9.544 6.045" />
+                          <path d="M15 12a3 3 0 1 0-6 0a3 3 0 0 0 6 0" />
+                        </g>
+                      </svg>
+                      View
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <!-- [ Main Content ] end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,158 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Create Test {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<style>
+    #left-eye-preview,
+    #right-eye-preview {
+        max-width: 100%;
+        max-height: 300px;
+        display: none;
+        border: 2px solid #ccc;
+        /* Light grey border */
+        border-radius: 10px;
+        /* Rounded corners */
+        padding: 10px;
+        /* Padding around the image */
+        background-color: #f9f9f9;
+        /* Light background for the image container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Subtle shadow for depth */
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Tests</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ breadcrumb ] end -->
+
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="container">
+                            <form method="POST" action="" enctype="multipart/form-data">
+
+                                <div class="row">
+                                    <!-- Patient Information -->
+                                    <div class="col-md-12">
+                                        <h5>Patient Details</h5>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="patient_name">Patient Name</label>
+                                                <input type="text" class="form-control" id="patient_name"
+                                                    name="patient_name"
+                                                    value="{{ patient.first_name }} {{ patient.last_name }}" readonly>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="gender">Gender</label>
+                                                <input type="text" class="form-control" id="gender" name="gender"
+                                                    value="{{ patient.gender }}" readonly>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="age">Age</label>
+                                                <input type="text" class="form-control" id="age" name="age"
+                                                    value="{{ age }}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="medical_history">Medical History</label>
+                                        <textarea class="form-control" id="medical_history" name="medical_history"
+                                            rows="3" readonly>{{ patient.medical_history }}</textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <!-- Test Type -->
+                                        <div class="form-group col-md-6">
+                                            <label for="test_type">Test Type</label>
+                                            <input type="text" class="form-control" id="test_type" name="test_type"
+                                                value="Retinal Scanning" readonly required>
+                                        </div>
+
+                                        <!-- Test Date -->
+                                        <div class="form-group col-md-6">
+                                            <label for="test_date">Test Date</label>
+                                            <input type="date" class="form-control" id="test_date" name="test_date"
+                                                value="{{ current_date }}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <!-- Left Eye Image Upload -->
+                                        <div class="form-group col-md-6">
+                                            <label for="left_eye_image">Left Eye Image</label>
+                                            <img id="left-eye-preview" src="#" alt="Left Eye Preview" class="mt-2" />
+                                            <input type="file" class="form-control" id="left_eye_image"
+                                                name="left_eye_image" accept="image/*"
+                                                onchange="previewImage(event, 'left-eye-preview')" required>
+
+                                        </div>
+
+                                        <!-- Right Eye Image Upload -->
+                                        <div class="form-group col-md-6">
+                                            <label for="right_eye_image">Right Eye Image</label>
+                                            <img id="right-eye-preview" src="#" alt="Right Eye Preview" class="mt-2" />
+                                            <input type="file" class="form-control" id="right_eye_image"
+                                                name="right_eye_image" accept="image/*"
+                                                onchange="previewImage(event, 'right-eye-preview')" required>
+
+                                        </div>
+                                    </div>
+                             
+
+
+
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-outline-primary mt-4 ">Submit</button>
+                                    </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE -->
+{% block javascripts %}
+<script>
+    function previewImage(event, previewId) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+<script>
+    // Set the current date as the default value
+    document.getElementById('test_date').value = new Date().toISOString().split('T')[0];
+</script>
+{% endblock javascripts %}

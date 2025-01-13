@@ -1,0 +1,106 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Prediction Class Distribution {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Predictions</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h3>Prediction Class Distribution</h3>
+
+                    <canvas id="predictionChart" width="400" height="200"></canvas>
+
+                    <h3>Prediction Details</h3>
+                    <div class="card">
+                        <div class="card-header">
+                          <div class="card-datatable table-responsive">
+                            <table class="table datatables-users table border-top align-middle datatable dt-responsive table-check">
+                                <thead>
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Confidence Score</th>
+                                        <th>Prediction Label</th>
+                                        <th>Predicted At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for prediction, patient in predictions_data %}
+                                        <tr>
+                                            <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+                                            <td>{{ prediction.confidence_score }}</td>
+                                            <td>{{ prediction.predicted_label }}</td>
+                                            <td>{{ prediction.predicted_at.strftime('%Y-%m-%d') }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('predictionChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ labels|tojson }},
+                datasets: [{
+                    label: 'Average Confidence Score',
+                    data: {{ avg_confidences|tojson }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Prediction Classes'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Average Confidence Score'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock javascripts %}
+
+
+
+

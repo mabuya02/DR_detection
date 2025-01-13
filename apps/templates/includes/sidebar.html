@@ -1,0 +1,73 @@
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar">
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a href="/" class="b-brand">
+                <div class="b-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                        <path fill="#3ba2db"
+                            d="M14.84 16.26C17.86 16.83 20 18.29 20 20v2H4v-2c0-1.71 2.14-3.17 5.16-3.74L12 21zM8 8h8v2a4 4 0 0 1-4 4a4 4 0 0 1-4-4zm0-1l.41-4.1a1 1 0 0 1 1-.9h5.19c.51 0 .94.39.99.9L16 7zm4-4h-1v1h-1v1h1v1h1V5h1V4h-1z" />
+                    </svg>
+                </div>
+                <span class="b-title">Maina Clinic</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Navigation</label>
+                </li>
+                <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project"
+                    class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="/" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                </li>
+                <li data-username="patients List" class="nav-item {% if 'patients' in segment %} active {% endif %}">
+                    <a href="/patients/list" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+                        <span class="pcoded-mtext">Patient List</span>
+                    </a>
+                </li>
+
+                <li data-username="Tests List" class="nav-item {% if 'tests' in segment %} active {% endif %}">
+                    <a href="/tests/test_list" class="nav-link">
+                        <span class="pcoded-micon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="#aeaeae"
+                                    d="M7.27 23.896L4.5 21.124a.35.35 0 0 1 0-.5l2.772-2.77a.35.35 0 0 1 .5 0l2.772 2.772a.35.35 0 0 1 0 .5l-2.772 2.77a.35.35 0 0 1-.5 0zm4.48-4.48l-2.772-2.772a.35.35 0 0 1 0-.498l2.772-2.772a.35.35 0 0 1 .5 0l2.77 2.772a.35.35 0 0 1 0 .5l-2.77 2.77a.35.35 0 0 1-.499 0zm4.48-4.48l-2.77-2.772a.35.35 0 0 1 0-.498l2.771-2.772a.35.35 0 0 1 .5 0l2.77 2.772a.35.35 0 0 1 0 .498l-2.772 2.772a.35.35 0 0 1-.5 0h.002zm-8.876.084l-2.772-2.77a.35.35 0 0 1 0-.499l2.772-2.773a.35.35 0 0 1 .5 0l2.772 2.772a.35.35 0 0 1 0 .498l-2.772 2.774a.35.35 0 0 1-.5 0zm4.48-4.48L9.062 7.77a.35.35 0 0 1 0-.5l2.772-2.772a.35.35 0 0 1 .5 0l2.77 2.772a.35.35 0 0 1 0 .498l-2.77 2.772a.35.35 0 0 1-.499 0v-.002v.001zM7.44 6.15L4.666 3.37a.35.35 0 0 1 0-.5L7.44.104a.35.35 0 0 1 .5 0l2.772 2.772a.35.35 0 0 1 0 .5L7.938 6.142a.35.35 0 0 1-.5 0l.002.006z" />
+                            </svg>
+                        </span>
+                        <span class="pcoded-mtext">Tests</span>
+                    </a>
+                </li>
+
+                <li data-username="Predictions List"
+                    class="nav-item {% if 'predictions' in segment %} active {% endif %}">
+                    <a href="/predictions/panel" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span>
+                        <span class="pcoded-mtext">Predictions</span>
+                    </a>
+                </li>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+                <li data-username="Disabled Menu" class="nav-item">
+                    <a href="{{ url_for('authentication_blueprint.logout') }}" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-power"></i></span><span
+                            class="pcoded-mtext">Logout</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
