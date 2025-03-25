@@ -1,8 +1,11 @@
 import torch
-from torchvision import transforms
+import torchvision
 from PIL import Image
 from .load_model import load_model
 from .grad_cam import GradCam
+
+# Explicitly import transforms
+import torchvision.transforms as transforms
 
 # Preprocessing for image (same as during training)
 def preprocess_image(image_path):
@@ -47,8 +50,6 @@ def model_prediction(model, image_tensor):
     predicted_class = output.argmax(dim=1).item()
     confidence = torch.softmax(output, dim=1)[0][predicted_class].item() * 100 
     return predicted_class, confidence
-
-
 
 def generate_grad_cam(model, image_tensor, target_layer):
     grad_cam = GradCam(model, target_layer)
